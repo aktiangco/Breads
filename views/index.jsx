@@ -1,4 +1,4 @@
-const React = require('react')
+const React = require('react') /* To run JSX */
 const Default = require('./layouts/Default')
 
 function Index ({breads, title}) {

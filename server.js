@@ -11,6 +11,8 @@ app.set('views', __dirname + '/views') // double underscore "__dirname" = dunder
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.static('public')) // Setup serving static assets
+app.use(express.urlencoded({extended: true})) //send our POST request
+
 
 
 // ROUTES

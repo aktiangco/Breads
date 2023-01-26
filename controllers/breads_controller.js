@@ -18,7 +18,7 @@ breads.post('/', (req, res) => {
     if (!req.body.image) {
       req.body.image = 'https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'
     }
-    // if(!req.body.name){} // to validate on server side
+    // if(!req.body.name){} // to validate on server
 
     if(req.body.hasGluten === 'on') {
       req.body.hasGluten = true
@@ -45,10 +45,19 @@ breads.get('/:arrayIndex', (req, res) => {
         res.render('error404')
     } else {
         res.render('Show', {
-            bread: currentBread
+            bread: currentBread,
+            index: breadIndex
         })
     }
 })
+
+// DELETE
+breads.delete('/:indexArray', (req, res) => {
+    // start (2), delete
+    Bread.splice(req.params.indexArray, 1)
+    res.status(303).redirect('/breads')
+  })
+  
 
 
 

@@ -1,5 +1,7 @@
 // DEPENDENCIES
 const express = require('express')
+const methodOverride = require('method-override')
+
 
 // CONFIGURATION
 require('dotenv').config()
@@ -11,7 +13,9 @@ app.set('views', __dirname + '/views') // double underscore "__dirname" = dunder
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.static('public')) // Setup serving static assets
-app.use(express.urlencoded({extended: true})) //send our POST request
+app.use(express.urlencoded({ extended: true })) //send our POST request
+app.use(methodOverride('_method')) // allows to override form default
+
 
 
 

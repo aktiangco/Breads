@@ -60,10 +60,16 @@ breads.get('/:id', (req, res) => {
     // const currentBread = Bread[breadIndex]; 
   Bread.findById(req.params.id)
     .then(foundBread => {
-      res.render('show', {
-          bread: foundBread,
+      Bread.getBreadsByBaker(foundBread.baker)
+        .then(bakersBread => {
+          // const bakedBy = foundBread.getBakedBy()
+          // console.log(bakedBy)
+          res.render('show', {
+            bread: foundBread,
+            bakersBread,
+        })
       })
-  })
+    })
     .catch(error => {
       res.render('error404')
     })
@@ -99,15 +105,15 @@ breads.put('/:id', (req, res) => {
   }
   // Bread[req.params.arrayIndex] = req.body
   Bread.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
-    .then(updateBread => {
-      console.log(updateBread)
+    .then((updatedBread) => {
+      console.log(updatedBread)
       res.redirect(`/breads/${req.params.id}`)
     })
     .catch(error => {
       res.render('error422', {
         error
-      })
     })
+  })
 })
   
 // CREATING a SEED Route

@@ -1,50 +1,48 @@
 const React = require('react')
 const Default = require('./layouts/Default')
 
-function Show ({bread, bakersBread}) {
+
+
+function Show ({bread}) {
     // Confirm we are getting our bread data in the terminal.
     // console.log(bread.name)
+    
       return (
         <Default>
-          <h3>{bread.name}</h3>
-
-          {/* Form to delete */}
-          <div>
-          <a href={`/breads/${bread.id}/edit`}><button>Edit</button></a>
-          <form action={`/breads/${bread.id}?_method=DELETE`} method="POST">
+            <h3>{bread.name}</h3>
+            <form action={`/breads/${bread.id}?_method=DELETE`} method="POST">
               <input type='submit' value="DELETE"/>
-          </form>
-          </div>
+            </form>
+            <a href={`/breads/${bread.id}/edit`}><button>Edit</button></a>
             <p>
-              It
-              {
+                and it
+                {
                 bread.hasGluten
-                  // Ternary operator
-                  // if (some condition) 
-                  // {' '} to add a space in between    
-                    ? <span> does </span> // ? = (true)
-                : <span> does NOT</span> // : = false)
-            }
-                  {' '}have gluten.  
-          </p>
-          <img src={bread.image} alt={bread.name} />
-          <p>{bread.getBakedBy()}</p>
-          <div>Other breads by {bread.baker}</div>
-          <ol>
-            {bakersBread.map(bread => {
+                ? <span> does </span>
+                : <span> does NOT </span>
+                }
+                have gluten.
+            </p>
+            <img src={bread.image} alt={bread.name} />
+            <p>{bread.getBakedBy()}</p>
+            <p>{bread.getBakerBio()}</p>
+            {/* <div>Other breads by {bread.baker.name}</div> */}
+            <ol>
+            {/* {bakersBread.map(bread => {
               return (
                 <li>
-                <a href={`/breads/${bread.id}`}>
+                  <a href={`/breads/${bread.id}`}>
                   {bread.name}
-                </a>
-              </li>
+                  </a>
+                </li>
               )
-            })}           
-          </ol>
-
+            })} */}
+            </ol>
+            <li><a href="/breads">Go home</a></li>
         </Default>
+
       )
-  }
+}
   
 
 module.exports = Show

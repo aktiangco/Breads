@@ -1,7 +1,6 @@
 // DEPENDENCIES
 const express = require('express')
 const methodOverride = require('method-override')
-
 const mongoose = require('mongoose')
 
 // CONFIGURATION
@@ -26,18 +25,23 @@ app.get('/', (req, res) => {
 // Breads
 const breadsController = require('./controllers/breads_controller.js')
 app.use('/breads', breadsController)
+// Bakers
+const bakersController = require('./controllers/bakers_controller.js')
+app.use('/bakers', bakersController)
+
 
 // 404 Page
 app.get('*', (req, res) => {
     res.render('error404') // 404 Not Found
 });
 
-// LISTEN to localhost:PORT
-app.listen(PORT, () => {
-    console.log('Listening on port', PORT)
-})
+
 
 // LISTEN to MONGO 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
     console.log(`connected to mongo: ${process.env.MONGO_URI}`)
+})
+// LISTEN to localhost:PORT
+app.listen(PORT, () => {
+    console.log('Listening on port', PORT)
 })

@@ -19,7 +19,7 @@ app.use(methodOverride('_method')) // allows to override form default
 
 // ROUTES
 app.get('/', (req, res) => {
-    res.redirect('/breads')
+    res.send('Welcome to an Awesome App about Breads')
 })
 
 // Breads
